@@ -1,9 +1,7 @@
 import { Suspense } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { ProjectCard } from "@/components/project-card";
 import { ExperienceCard } from "@/components/experience-card";
-import { TechBadge } from "@/components/tech-badge";
 import type {
   Profile,
   Project,
@@ -15,6 +13,7 @@ import { createClient } from "@/utils/supabase/server";
 import { GridSection } from "@/app/features/landing-page/components/ProfileCard";
 import HeroSection from "./features/landing-page/sections/Hero";
 import FeaturedProjectSection from "./features/landing-page/sections/FeaturedProject";
+import TechStackSection from "./features/landing-page/sections/TechStack";
 
 async function getHomeData() {
   const supabase = await createClient();
@@ -128,32 +127,7 @@ export default async function HomePage() {
 
       {/* ─── TECH STACK ─────────────────────────────────────────── */}
       {primaryTech.length > 0 && (
-        <section className="section bg-muted/30">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div className="bg-primary inline-block mb-2 px-2">
-              <p className="text-primary-foreground text-sm font-mono uppercase tracking-widest">
-                Tools
-              </p>
-            </div>
-            <h2 className="font-display text-4xl font-bold text-foreground mb-12">
-              {configMap.techstack_title || "Tech Stack"}
-            </h2>
-            <div className="flex flex-wrap justify-center gap-3">
-              {primaryTech.map((tech) => (
-                <TechBadge key={tech.id} tech={tech} />
-              ))}
-            </div>
-            <div className="mt-8">
-              <Link
-                href="/techstack"
-                className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                View full tech stack
-                <ArrowRight size={14} />
-              </Link>
-            </div>
-          </div>
-        </section>
+        <TechStackSection primaryTech={primaryTech} configMap={configMap} />
       )}
 
       {/* ─── CTA ────────────────────────────────────────────────── */}
@@ -174,7 +148,9 @@ export default async function HomePage() {
               </p>
               {profile?.email && (
                 <a
-                  href={`mailto:${profile.email}`}
+                  href={`https://mail.google.com/mail/?view=cm&fs=1&to=${profile.email}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-8 py-4 bg-amber text-navy rounded-xl font-semibold hover:opacity-90 transition-all shadow-lg shadow-amber/30"
                 >
                   Say Hello

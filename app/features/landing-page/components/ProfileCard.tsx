@@ -99,11 +99,22 @@ export default function ProfileCard({
             }}
           >
             <div className="p-2 bg-card/10 backdrop-blur-md rounded-xl border border/20 shadow-lg group hover:border transition-colors">
-              <img
-                src={`${tech.icon_url}?w=32&h=32`}
-                alt={tech.name}
-                className="w-8 h-8 sm:w-10 sm:h-10 object-contain"
-              />
+              {tech.icon_url ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <Image
+                  src={`${tech.icon_url}`}
+                  alt={`${tech.name || "Tech Icon"}`}
+                  width={20}
+                  priority={true}
+                  height={20}
+                  sizes="20px"
+                  className="w-5 h-5 object-contain"
+                />
+              ) : (
+                <div className="w-5 h-5 rounded bg-muted flex items-center justify-center text-xs font-bold text-muted-foreground">
+                  {tech.name.charAt(0)}
+                </div>
+              )}
             </div>
             <span className="text-[10px] font-medium text-foreground/70">
               {tech.name}
@@ -163,7 +174,7 @@ export function GridSection() {
       </div>
 
       <div
-        className="absolute inset-0 pointer-events-none animate-fade-in"
+        className="absolute inset-0 pointer-events-none"
         style={{
           background:
             "radial-gradient(circle at center, transparent 0%, var(--background) 100%)",

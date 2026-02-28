@@ -1,6 +1,9 @@
 import Link from "next/link";
-import { Github, Linkedin, Twitter, Mail, ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { createClient } from "@/utils/supabase/server";
+import { MdAttachEmail, MdEmail } from "react-icons/md";
+import { ImLocation2 } from "react-icons/im";
+import { FaGithub, FaHeart, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 export async function Footer() {
   let profile = null;
@@ -32,22 +35,22 @@ export async function Footer() {
 
   const socialLinks = [
     profile?.github_url && {
-      icon: Github,
+      icon: FaGithub,
       href: profile.github_url,
       label: "GitHub",
     },
     profile?.linkedin_url && {
-      icon: Linkedin,
+      icon: FaLinkedin,
       href: profile.linkedin_url,
       label: "LinkedIn",
     },
     profile?.twitter_url && {
-      icon: Twitter,
+      icon: FaTwitter,
       href: profile.twitter_url,
       label: "Twitter",
     },
     profile?.email && {
-      icon: Mail,
+      icon: MdEmail,
       href: `mailto:${profile.email}`,
       label: "Email",
     },
@@ -118,10 +121,12 @@ export async function Footer() {
             </h3>
             {profile?.email && (
               <a
-                href={`mailto:${profile.email}`}
+                href={`https://mail.google.com/mail/?view=cm&fs=1&to=${profile.email}`}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors group"
               >
-                <Mail size={14} className="text-amber" />
+                <MdAttachEmail size={14} className="text-amber" />
                 {profile.email}
                 <ExternalLink
                   size={12}
@@ -131,7 +136,8 @@ export async function Footer() {
             )}
             {profile?.location && (
               <p className="text-sm text-muted-foreground">
-                📍 {profile.location}
+                <ImLocation2 size={14} className="text-amber inline-block" />{" "}
+                {profile.location}
               </p>
             )}
             {profile?.open_to_work && (
@@ -150,7 +156,7 @@ export async function Footer() {
           </p>
           <p className="text-xs text-muted-foreground flex items-center gap-1.5">
             Built with
-            <span className="text-amber">♥</span>
+            <span className="text-amber"><FaHeart /></span>
             using Next.js & Supabase
           </p>
         </div>

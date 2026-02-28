@@ -21,7 +21,7 @@ export default function FeaturedProjectSection({
   featuredProjects: Project[];
 }) {
   return (
-    <section className="section relative overflow-hidden bg-muted/30">
+    <section className="section relative overflow-hidden bg-card/70">
       <CircuitBackground />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
