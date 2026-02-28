@@ -1,10 +1,17 @@
 "use client";
 
 import Link from "next/link";
-import { ExternalLink, Github, Building2, User, ArrowUpRight } from "lucide-react";
+import {
+  ExternalLink,
+  Github,
+  Building2,
+  User,
+  ArrowUpRight,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Project } from "@/types";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 interface ProjectCardProps {
   project: Project;
@@ -24,7 +31,11 @@ const STATUS_LABELS = {
   archived: "Archived",
 };
 
-export function ProjectCard({ project, index = 0, variant = "default" }: ProjectCardProps) {
+export function ProjectCard({
+  project,
+  index = 0,
+  variant = "default",
+}: ProjectCardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -32,19 +43,22 @@ export function ProjectCard({ project, index = 0, variant = "default" }: Project
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className={cn(
         "group relative bg-card border border-border rounded-2xl overflow-hidden hover:border-amber/50 transition-all duration-300 hover:shadow-lg hover:shadow-navy/5 dark:hover:shadow-amber/5",
-        variant === "compact" && "p-5"
+        variant === "compact" && "p-5",
       )}
     >
       {/* Cover image */}
       {variant !== "compact" && project.cover_image_url && (
         <div className="relative h-48 overflow-hidden bg-muted">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={project.cover_image_url}
+          <Image
+            src={project.cover_image_url || "/placeholder-image.jpg"}
             alt={project.title}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            priority={project.is_featured}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-card/80 to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-t from-card/80 to-transparent" />
         </div>
       )}
 
@@ -62,20 +76,31 @@ export function ProjectCard({ project, index = 0, variant = "default" }: Project
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
             {/* Category badge */}
-            <span className={cn(
-              "inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full",
-              project.category === "company"
-                ? "bg-steel/10 text-steel dark:text-steel-200"
-                : "bg-navy/10 text-navy dark:bg-amber/10 dark:text-amber"
-            )}>
+            <span
+              className={cn(
+                "inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full",
+                project.category === "company"
+                  ? "bg-steel/10 text-steel dark:text-steel-200"
+                  : "bg-navy/10 text-navy dark:bg-amber/10 dark:text-amber",
+              )}
+            >
               {project.category === "company" ? (
-                <><Building2 size={10} /> Company</>
+                <>
+                  <Building2 size={10} /> Company
+                </>
               ) : (
-                <><User size={10} /> Personal</>
+                <>
+                  <User size={10} /> Personal
+                </>
               )}
             </span>
 
-            <span className={cn("text-xs px-2.5 py-1 rounded-full font-medium", STATUS_COLORS[project.status])}>
+            <span
+              className={cn(
+                "text-xs px-2.5 py-1 rounded-full font-medium",
+                STATUS_COLORS[project.status],
+              )}
+            >
               {STATUS_LABELS[project.status]}
             </span>
           </div>
@@ -135,7 +160,9 @@ export function ProjectCard({ project, index = 0, variant = "default" }: Project
             </a>
           )}
           {!project.live_url && !project.github_url && (
-            <span className="text-xs text-muted-foreground italic">Private project</span>
+            <span className="text-xs text-muted-foreground italic">
+              Private project
+            </span>
           )}
           {/* Hover arrow */}
           <ArrowUpRight

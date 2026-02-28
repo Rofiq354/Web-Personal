@@ -58,7 +58,7 @@ export default function ProfileCard({
       <motion.div
         animate={{ y: [0, -10, 0] }} // Efek melayang pelan
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        className="relative z-10 w-48 h-48 sm:w-80 sm:h-80 rounded-full border-8 border-amber/10 p-2 bg-background shadow-2xl overflow-hidden"
+        className="relative z-10 w-48 h-48 sm:w-80 sm:h-80 rounded-full border-8 border-primary/20 p-2 shadow-2xl overflow-hidden"
       >
         <Image
           src={profile?.avatar_url || "/default.png"}
@@ -132,10 +132,10 @@ export function GridSection() {
     return () => window.removeEventListener("resize", calculateGrid);
   }, [calculateGrid]);
 
-  if (!mounted) return <div className="absolute inset-0 bg-background" />;
+  if (!mounted) return <div className="absolute inset-0" />;
 
   return (
-    <div className="absolute inset-0 z-0 overflow-hidden bg-background">
+    <div className="absolute inset-0 z-0 overflow-hidden">
       <div
         className="absolute inset-0"
         style={{
