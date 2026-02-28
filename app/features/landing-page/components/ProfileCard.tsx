@@ -163,7 +163,7 @@ export function GridSection() {
       </div>
 
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 pointer-events-none animate-fade-in"
         style={{
           background:
             "radial-gradient(circle at center, transparent 0%, var(--background) 100%)",

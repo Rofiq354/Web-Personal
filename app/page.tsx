@@ -12,7 +12,7 @@ import type {
   SiteConfigMap,
 } from "@/types";
 import { createClient } from "@/utils/supabase/server";
-import { GridSection } from "@/components/profile-card";
+import { GridSection } from "@/app/features/landing-page/components/ProfileCard";
 import HeroSection from "./features/landing-page/sections/Hero";
 import FeaturedProjectSection from "./features/landing-page/sections/FeaturedProject";
 
@@ -105,7 +105,7 @@ export default async function HomePage() {
               </div>
               <Link
                 href="/experience"
-                className="hidden sm:inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                className="hidden sm:inline-flex items-center z-1 gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 Full history
                 <ArrowRight size={14} />

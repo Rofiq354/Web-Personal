@@ -31,8 +31,11 @@ export function InitialLoader() {
       {isLoading && (
         <motion.div
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0, transition: { duration: 0.5, ease: "easeInOut" } }}
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#1A3263]"
+          exit={{
+            opacity: 0,
+            transition: { duration: 0.5, ease: "easeInOut" },
+          }}
+          className="fixed inset-0 z-99 flex items-center justify-center bg-background"
         >
           {/* Background pattern */}
           <div className="absolute inset-0 opacity-5">
@@ -40,7 +43,7 @@ export function InitialLoader() {
               className="absolute inset-0"
               style={{
                 backgroundImage:
-                  "radial-gradient(circle at 1px 1px, #FAB95B 1px, transparent 0)",
+                  "radial-gradient(circle at 1px 1px, var(--foreground) 1px, transparent 0)",
                 backgroundSize: "48px 48px",
               }}
             />
@@ -58,11 +61,13 @@ export function InitialLoader() {
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 3, ease: "linear", repeat: Infinity }}
-                className="absolute -inset-4 rounded-full border-2 border-dashed border-[#FAB95B]/30"
+                className="absolute -inset-4 rounded-full border-2 border-dashed border-accent/30"
               />
               {/* Inner box */}
-              <div className="w-16 h-16 rounded-2xl bg-[#FAB95B] flex items-center justify-center shadow-2xl shadow-[#FAB95B]/20">
-                <span className="font-display text-2xl font-bold text-[#1A3263]">P</span>
+              <div className="w-16 h-16 rounded-2xl bg-accent flex items-center justify-center shadow-2xl shadow-accent/20">
+                <span className="font-display text-2xl font-bold text-foreground">
+                  P
+                </span>
               </div>
             </motion.div>
 
@@ -76,7 +81,7 @@ export function InitialLoader() {
               {[0, 1, 2, 3, 4].map((i) => (
                 <motion.div
                   key={i}
-                  className="w-1.5 bg-[#FAB95B] rounded-full"
+                  className="w-1.5 bg-accent rounded-full"
                   animate={{
                     scaleY: [0.4, 1, 0.4],
                     opacity: [0.5, 1, 0.5],
@@ -97,15 +102,15 @@ export function InitialLoader() {
               initial={{ opacity: 0 }}
               animate={{ opacity: [0.4, 1, 0.4] }}
               transition={{ duration: 1.5, repeat: Infinity }}
-              className="text-[#E8E2DB]/60 text-sm font-mono tracking-widest uppercase"
+              className="text-foreground/60 text-sm font-mono tracking-widest uppercase"
             >
               Loading...
             </motion.p>
           </div>
 
           {/* Corner decorations */}
-          <div className="absolute top-6 left-6 w-12 h-12 border-t-2 border-l-2 border-[#547792]/40 rounded-tl-lg" />
-          <div className="absolute bottom-6 right-6 w-12 h-12 border-b-2 border-r-2 border-[#FAB95B]/40 rounded-br-lg" />
+          <div className="absolute top-6 left-6 w-12 h-12 border-t-2 border-l-2 border-secondary/40 rounded-tl-lg" />
+          <div className="absolute bottom-6 right-6 w-12 h-12 border-b-2 border-r-2 border-accent/40 rounded-br-lg" />
         </motion.div>
       )}
     </AnimatePresence>

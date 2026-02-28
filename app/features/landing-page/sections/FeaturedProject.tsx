@@ -1,11 +1,17 @@
 "use client";
 
+import { ProjectCard } from "@/components/project-card";
 import { Project, SiteConfigMap } from "@/types";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { useRef } from "react";
-import ParallaxCard from "../components/ProjectCardParalax";
+import { Suspense } from "react";
+import CircuitBackground from "../components/CircuitBackground";
+
+const fadeIn = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1 },
+};
 
 export default function FeaturedProjectSection({
   configMap,
@@ -14,31 +20,17 @@ export default function FeaturedProjectSection({
   configMap: SiteConfigMap;
   featuredProjects: Project[];
 }) {
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-
-  const headerOpacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
-
-  const bgY = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
-
   return (
-    <section
-      ref={sectionRef}
-      className="section relative overflow-hidden bg-muted/30"
-    >
-      {/* Background paralax */}
-      <motion.div
-        style={{ y: bgY }}
-        className="absolute inset-0 -z-10 opacity-30 blur-3xl bg-linear-to-br from-primary/20 via-transparent to-steel/30"
-      />
+    <section className="section relative overflow-hidden bg-muted/30">
+      <CircuitBackground />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          style={{ opacity: headerOpacity }}
+          variants={fadeIn}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6 }}
           className="flex items-end justify-between mb-12"
         >
           <div>
@@ -71,13 +63,21 @@ export default function FeaturedProjectSection({
             const spanTwo = isFirst || isLast;
 
             return (
-              <ParallaxCard
+              <motion.div
                 key={project.id}
-                project={project}
-                index={i}
-                scrollYProgress={scrollYProgress}
-                spanTwo={spanTwo}
-              />
+                variants={fadeIn}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className={spanTwo ? "lg:col-span-2" : ""}
+              >
+                <Suspense
+                  fallback={<div className="skeleton h-48 rounded-2xl" />}
+                >
+                  <ProjectCard project={project} index={i} />
+                </Suspense>
+              </motion.div>
             );
           })}
         </div>

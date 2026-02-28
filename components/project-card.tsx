@@ -64,7 +64,7 @@ export function ProjectCard({
 
       {/* Placeholder if no image */}
       {variant !== "compact" && !project.cover_image_url && (
-        <div className="h-48 bg-gradient-to-br from-navy/10 to-steel/10 dark:from-navy/40 dark:to-steel/30 flex items-center justify-center">
+        <div className="h-48 bg-linear-to-br from-navy/10 to-steel/10 dark:from-navy/40 dark:to-steel/30 flex items-center justify-center">
           <div className="text-4xl font-display font-bold text-foreground/10">
             {project.title.charAt(0)}
           </div>
@@ -167,7 +167,7 @@ export function ProjectCard({
           {/* Hover arrow */}
           <ArrowUpRight
             size={14}
-            className="ml-auto text-muted-foreground/0 group-hover:text-amber group-hover:text-muted-foreground/60 transition-all"
+            className="ml-auto text-muted-foreground/0 group-hover:text-muted-foreground/60 transition-all"
           />
         </div>
       </div>
