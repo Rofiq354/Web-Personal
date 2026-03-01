@@ -1,7 +1,4 @@
-import { Suspense } from "react";
-import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { ExperienceCard } from "@/components/experience-card";
 import type {
   Profile,
   Project,
@@ -10,11 +7,11 @@ import type {
   SiteConfigMap,
 } from "@/types";
 import { createClient } from "@/utils/supabase/server";
-import { GridSection } from "@/app/features/landing-page/components/ProfileCard";
 import HeroSection from "./features/landing-page/sections/Hero";
 import FeaturedProjectSection from "./features/landing-page/sections/FeaturedProject";
 import TechStackSection from "./features/landing-page/sections/TechStack";
 import ExperienceSection from "./features/landing-page/sections/Experience";
+import { MdEmail } from "react-icons/md";
 
 async function getHomeData() {
   const supabase = await createClient();
@@ -70,6 +67,11 @@ export default async function HomePage() {
     configMap,
   } = await getHomeData();
 
+  const subject = encodeURIComponent("Hello! Let's Work Together");
+  const body = encodeURIComponent(
+    `Hi there,\n\nI came across your portfolio and would love to discuss a potential collaboration.\n\nLooking forward to hearing from you!`,
+  );
+
   return (
     <div className="overflow-hidden">
       {/* ─── HERO ─────────────────────────────────────────────── */}
@@ -89,7 +91,10 @@ export default async function HomePage() {
 
       {/* ─── EXPERIENCE ─────────────────────────────────────────── */}
       {recentExperience.length > 0 && (
-        <ExperienceSection configMap={configMap} recentExperience={recentExperience} />
+        <ExperienceSection
+          configMap={configMap}
+          recentExperience={recentExperience}
+        />
       )}
 
       {/* ─── TECH STACK ─────────────────────────────────────────── */}
@@ -115,12 +120,12 @@ export default async function HomePage() {
               </p>
               {profile?.email && (
                 <a
-                  href={`https://mail.google.com/mail/?view=cm&fs=1&to=${profile.email}`}
+                  href={`https://mail.google.com/mail/?view=cm&fs=1&to=${profile.email}&su=${subject}&body=${body}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-8 py-4 bg-amber text-navy rounded-xl font-semibold hover:opacity-90 transition-all shadow-lg shadow-amber/30"
                 >
-                  Say Hello
+                  <MdEmail size={20} /> Say Hello
                   <ArrowRight size={18} />
                 </a>
               )}

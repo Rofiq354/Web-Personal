@@ -5,6 +5,7 @@ import { SiteConfigMap, TechStack } from "@/types";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import CircuitBackground from "../components/CircuitBackground";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -66,7 +67,8 @@ export default function TechStackSection({
   if (primaryTech.length === 0) return null;
 
   return (
-    <section className="section relative overflow-hidden bg-card">
+    <section className="section relative overflow-hidden bg-card/70">
+      <CircuitBackground />
       {/* Radial glow */}
       <div className="absolute inset-0 -z-10 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-100 rounded-full bg-primary/10 blur-3xl" />
