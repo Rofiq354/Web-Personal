@@ -14,6 +14,7 @@ import { GridSection } from "@/app/features/landing-page/components/ProfileCard"
 import HeroSection from "./features/landing-page/sections/Hero";
 import FeaturedProjectSection from "./features/landing-page/sections/FeaturedProject";
 import TechStackSection from "./features/landing-page/sections/TechStack";
+import ExperienceSection from "./features/landing-page/sections/Experience";
 
 async function getHomeData() {
   const supabase = await createClient();
@@ -88,41 +89,7 @@ export default async function HomePage() {
 
       {/* ─── EXPERIENCE ─────────────────────────────────────────── */}
       {recentExperience.length > 0 && (
-        <section className="relative section">
-          <GridSection />
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-end justify-between mb-12">
-              <div>
-                <div className="bg-primary inline-block mb-2 px-2">
-                  <p className="text-primary-foreground text-sm font-mono uppercase tracking-widest">
-                    Career
-                  </p>
-                </div>
-                <h2 className="font-display text-4xl font-bold text-foreground">
-                  {configMap.experience_title || "Work Experience"}
-                </h2>
-              </div>
-              <Link
-                href="/experience"
-                className="hidden sm:inline-flex items-center z-1 gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Full history
-                <ArrowRight size={14} />
-              </Link>
-            </div>
-
-            <div className="space-y-4">
-              {recentExperience.map((exp, i) => (
-                <Suspense
-                  key={exp.id}
-                  fallback={<div className="skeleton h-32 rounded-2xl" />}
-                >
-                  <ExperienceCard experience={exp} index={i} />
-                </Suspense>
-              ))}
-            </div>
-          </div>
-        </section>
+        <ExperienceSection configMap={configMap} recentExperience={recentExperience} />
       )}
 
       {/* ─── TECH STACK ─────────────────────────────────────────── */}

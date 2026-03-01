@@ -66,7 +66,7 @@ export default function TechStackSection({
   if (primaryTech.length === 0) return null;
 
   return (
-    <section className="section relative overflow-hidden bg-muted/30">
+    <section className="section relative overflow-hidden bg-card">
       {/* Radial glow */}
       <div className="absolute inset-0 -z-10 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-100 rounded-full bg-primary/10 blur-3xl" />
