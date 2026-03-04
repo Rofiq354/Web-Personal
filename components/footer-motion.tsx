@@ -138,7 +138,7 @@ export default function FooterMotion({
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors group"
               >
-                <MdAttachEmail size={14} className="text-amber" />
+                <MdAttachEmail size={14} />
                 {profile.email}
                 <ExternalLink
                   size={12}
@@ -148,7 +148,7 @@ export default function FooterMotion({
             )}
             {profile?.location && (
               <p className="text-sm text-muted-foreground">
-                <ImLocation2 size={14} className="text-amber inline-block" />{" "}
+                <ImLocation2 size={14} className="inline-block" />{" "}
                 {profile.location}
               </p>
             )}
@@ -175,7 +175,7 @@ export default function FooterMotion({
           </p>
           <p className="text-xs text-muted-foreground flex items-center gap-1.5">
             Built with
-            <span className="text-amber">
+            <span className="text-red-500">
               <FaHeart />
             </span>
             using Next.js & Supabase
