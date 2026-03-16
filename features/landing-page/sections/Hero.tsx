@@ -1,10 +1,8 @@
-import ProfileCard, {
-  GridSection,
-} from "@/app/features/landing-page/components/ProfileCard";
 import { Profile, SiteConfigMap, TechStack } from "@/types";
 import { ArrowRight, Download, MapPin, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
+import ProfileCard, { GridSection } from "../components/ProfileCard";
 
 export default function HeroSection({
   profile,

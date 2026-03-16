@@ -7,10 +7,10 @@ import type {
   SiteConfigMap,
 } from "@/types";
 import { createClient } from "@/utils/supabase/server";
-import HeroSection from "./features/landing-page/sections/Hero";
-import FeaturedProjectSection from "./features/landing-page/sections/FeaturedProject";
-import TechStackSection from "./features/landing-page/sections/TechStack";
-import ExperienceSection from "./features/landing-page/sections/Experience";
+import HeroSection from "@/features/landing-page/sections/Hero";
+import FeaturedProjectSection from "@/features/landing-page/sections/FeaturedProject";
+import TechStackSection from "@/features/landing-page/sections/TechStack";
+import ExperienceSection from "@/features/landing-page/sections/Experience";
 import { MdEmail } from "react-icons/md";
 
 async function getHomeData() {

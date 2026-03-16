@@ -56,12 +56,8 @@ export default function FeaturedProjectSection({
           </Link>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {featuredProjects.map((project, i) => {
-            const isFirst = i === 0;
-            const isLast = i === featuredProjects.length - 1;
-            const spanTwo = isFirst || isLast;
-
             return (
               <motion.div
                 key={project.id}
@@ -70,7 +66,6 @@ export default function FeaturedProjectSection({
                 whileInView="show"
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className={spanTwo ? "lg:col-span-2" : ""}
               >
                 <Suspense
                   fallback={<div className="skeleton h-48 rounded-2xl" />}

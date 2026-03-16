@@ -13,17 +13,37 @@ interface ProjectsContentProps {
 
 type Tab = "all" | "personal" | "company";
 
-export function ProjectsContent({ personalProjects, companyProjects }: ProjectsContentProps) {
+export function ProjectsContent({
+  personalProjects,
+  companyProjects,
+}: ProjectsContentProps) {
   const [activeTab, setActiveTab] = useState<Tab>("all");
-  const allProjects = [...personalProjects, ...companyProjects].sort((a, b) => a.sort_order - b.sort_order);
+  const allProjects = [...personalProjects, ...companyProjects].sort(
+    (a, b) => a.sort_order - b.sort_order,
+  );
 
   const tabs = [
     { id: "all" as Tab, label: "All", count: allProjects.length },
-    { id: "personal" as Tab, label: "Personal", count: personalProjects.length, icon: User },
-    { id: "company" as Tab, label: "Company", count: companyProjects.length, icon: Building2 },
+    {
+      id: "personal" as Tab,
+      label: "Personal",
+      count: personalProjects.length,
+      icon: User,
+    },
+    {
+      id: "company" as Tab,
+      label: "Company",
+      count: companyProjects.length,
+      icon: Building2,
+    },
   ];
 
-  const visibleProjects = activeTab === "all" ? allProjects : activeTab === "personal" ? personalProjects : companyProjects;
+  const visibleProjects =
+    activeTab === "all"
+      ? allProjects
+      : activeTab === "personal"
+        ? personalProjects
+        : companyProjects;
 
   return (
     <div>
@@ -37,17 +57,17 @@ export function ProjectsContent({ personalProjects, companyProjects }: ProjectsC
               "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all",
               activeTab === tab.id
                 ? "bg-card text-foreground shadow-sm"
-                : "text-muted-foreground hover:text-foreground"
+                : "text-muted-foreground hover:text-foreground",
             )}
           >
             {tab.icon && <tab.icon size={14} />}
             {tab.label}
             <span
               className={cn(
-                "px-1.5 py-0.5 rounded-md text-xs",
+                "px-1.5 py-0.5 rounded-md text-xs hidden sm:inline-block",
                 activeTab === tab.id
                   ? "bg-amber/20 text-amber"
-                  : "bg-muted-foreground/10 text-muted-foreground"
+                  : "bg-muted-foreground/10 text-muted-foreground",
               )}
             >
               {tab.count}
